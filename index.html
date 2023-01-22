@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pin matcher</title>
+    <style>
+        div,
+        button {
+            border-radius: 10px;
+            padding: 3px 5px ;
+            border: none;
+        }
+        
+        input {
+            border-radius: 5px;
+            margin: 5px;
+            border: 1px solid;
+        }
+        
+        input:text {
+            text-align: center;
+            color: white;
+        }
+       
+        
+        .pin {
+            color: white;
+            font-style: bold;
+            padding: 5px 7px;
+            text-align: center;
+        }
+        
+        #invailed-pin {
+            background-color: brown;
+        }
+        
+        #pin-matched {
+            background-color: chartreuse;
+        }
+        
+        .matcher {
+            background-color: #273068;
+            width: 300px;
+            text-align: center;
+            font-weight: 200;
+            margin-top: 0 auto;
+        }
+        
+        .inputPinArea {
+            background: #273068;
+            text-align: center;
+            width: 300px;
+        }
+        
+        .warning {
+            display: none;
+            text-align: center;
+        }
+        .container{
+            background-color: #495BC3;
+            top: 15%;
+            left: 37%;
+           position: absolute;
+            display: inline-block;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="matcher">
+            <input style="color: white;" type="text" id="value" disabled>
+            <button onclick="call()">Generate Pin</button>
+        </div>
+        <br><br>
+    
+        <div class="inputPinArea">
+            <input type="text" style="color: white;" id="inputBar" disabled>
+            <div>
+                <input type="button" onclick="calculate(this.value)" value="1">
+                <input type="button" onclick="calculate(this.value)" value="2">
+                <input type="button" onclick="calculate(this.value)" value="3">
+            </div>
+            <div>
+                <input type="button" onclick="calculate(this.value)" value="4">
+                <input type="button" onclick="calculate(this.value)" value="5">
+                <input type="button" onclick="calculate(this.value)" value="6">
+            </div>
+            <div>
+                <input type="button" onclick="calculate(this.value)" value="7">
+                <input type="button" onclick="calculate(this.value)" value="8">
+                <input type="button" onclick="calculate(this.value)" value="9">
+            </div>
+            <div>
+                <input type="button" onclick="backspace()" value="<">
+                <input type="button" onclick="calculate(this.value)" value="0">
+                <input type="button" onclick="clearAll()" value="C">
+                <div>
+                    <input type="button" onclick="submitPin()" value="submit">
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+
+    <h2 id="pin-matched" class="warning">pin matched...!</h2>
+    <h2 id="invailed-pin" class="warning">sorry invailed pin</h2>
+
+    <script>
+       
+        let digit = 0;
+
+        function call() {
+            const show = document.getElementById("value");
+            let pin = Math.floor(Math.random() * (10000 - 1000) + 1000);
+            show.value = pin ;
+            return digit = pin;
+        }
+
+        function clearAll() {
+            document.getElementById("inputBar").value = "";
+        }
+
+        function calculate(x) {
+            let newPin = document.getElementById("inputBar").value = document.getElementById("inputBar").value + x;
+        }
+
+       
+        function backspace() {
+            let srt = document.getElementById("inputBar").value.slice(0, -1);
+            document.getElementById("inputBar").value = srt;
+        }
+
+        function submitPin() {
+
+            let typedPin = document.getElementById("inputBar").value;
+            if (digit == typedPin) {
+                console.log("right")
+                document.getElementById("pin-matched").style.display="block";
+            } 
+            else{
+                document.getElementById("invailed-pin").style.display="block";
+            }
+            
+           
+        }
+    </script>
+
+</body>
+
+</html>
